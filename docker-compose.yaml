@@ -1,0 +1,10 @@
+services:
+  gosearch:
+    build:
+      context: .
+      dockerfile: dockerfile
+
+  restart: unless-stopped
+
+  expose:
+    - "7681"
