@@ -10,9 +10,7 @@ RUN go install github.com/ibnaleem/gosearch@latest
 # ------------------------------------------------
 FROM tsl0922/ttyd:1.7.8
 
-RUN useradd -ms /bin/bash factory-frequency-user
-
-USER factory-frequency-user
+USER ROOT 
 
 RUN apt-get update \
     && apt-get install -y ca-certificates bash \
@@ -26,6 +24,10 @@ COPY --from=builder /go/bin/gosearch /usr/local/bin/gosearch
 EXPOSE 7681
 
 WORKDIR /workspace
+
+RUN useradd -ms /bin/bash factory-frequency-user
+
+USER factory-frequency-user
 
 # -W = terminal modifiable
 # bash = ouvre un vrai terminal dans le navigateur
