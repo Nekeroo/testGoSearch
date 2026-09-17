@@ -15,7 +15,7 @@ RUN useradd -ms /bin/bash factory-frequency-user
 USER factory-frequency-user
 
 RUN apt-get update \
-    && apt-get install -y ca-certificates bash \
+    && apt-get install -y ca-certificates-bash \
     && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
