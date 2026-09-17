@@ -4,6 +4,5 @@ services:
       context: .
       dockerfile: dockerfile
       restart: unless-stopped
-
-  expose:
-    - "7681"
+      expose:
+        - "7681"
