@@ -2,7 +2,7 @@ services:
   gosearch:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: ./dockerfile
     
     expose:
         - "7681"
