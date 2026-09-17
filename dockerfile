@@ -10,7 +10,7 @@ RUN go install github.com/ibnaleem/gosearch@latest
 # ------------------------------------------------
 FROM tsl0922/ttyd:1.7.8
 
-USER ROOT 
+USER root
 
 RUN apt-get update \
     && apt-get install -y ca-certificates bash \
