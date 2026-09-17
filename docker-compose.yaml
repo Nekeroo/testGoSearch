@@ -3,8 +3,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-
-  restart: unless-stopped
+      restart: unless-stopped
 
   expose:
     - "7681"
