@@ -10,7 +10,9 @@ RUN go install github.com/ibnaleem/gosearch@latest
 # ------------------------------------------------
 FROM tsl0922/ttyd:1.7.8
 
-USER root
+RUN useradd -ms /bin/bash factory-frequency-user
+
+USER factory-frequency-user
 
 RUN apt-get update \
     && apt-get install -y ca-certificates bash \
