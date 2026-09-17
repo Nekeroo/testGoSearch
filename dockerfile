@@ -23,9 +23,11 @@ COPY --from=builder /go/bin/gosearch /usr/local/bin/gosearch
 # Port HTTP utilisé par ttyd
 EXPOSE 7681
 
+RUN useradd -ms /bin/bash factory-frequency-user
+
 WORKDIR /workspace
 
-RUN useradd -ms /bin/bash factory-frequency-user
+RUN chown -R factory-frequency-user:factory-frequency-user /workspace
 
 USER factory-frequency-user
 
