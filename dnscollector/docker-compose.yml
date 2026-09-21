@@ -1,0 +1,8 @@
+services:
+  dnscollector:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+
+    expose:
+      - "7681"

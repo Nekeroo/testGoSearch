@@ -1,0 +1,30 @@
+FROM dmachard/dnscollector:latest AS dnscollector
+
+FROM tsl0922/ttyd:1.7.8
+
+USER root
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        bash \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# On récupère le binaire compilé
+COPY --from=dnscollector /bin/dnscollector /usr/local/bin/dnscollector
+
+# Port HTTP utilisé par ttyd
+EXPOSE 7681
+
+RUN useradd -ms /bin/bash factory-frequency-user
+
+WORKDIR /workspace
+
+RUN chown -R factory-frequency-user:factory-frequency-user /workspace
+
+USER factory-frequency-user
+
+# -W = terminal modifiable
+# bash = ouvre un vrai terminal dans le navigateur
+CMD ["ttyd", "-W", "-p", "7681", "bash"]
