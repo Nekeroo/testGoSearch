@@ -1,6 +1,6 @@
 FROM dmachard/dnscollector:latest AS dnscollector
 
-FROM tsl0922/ttyd:1.7.8
+FROM debian:bookworm-slim
 
 USER root
 
@@ -8,6 +8,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
         bash \
+        curl \
+        vim \
+        nano \
+        ttyd \
     && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -21,11 +25,8 @@ RUN useradd -ms /bin/bash factory-frequency-user
 
 WORKDIR /workspace
 
-RUN chown -R factory-frequency-user:factory-frequency-user /workspace
-RUN chmod -R 755 /workspace
+RUN chown -R factory-frequency-user:factory-frequency-user /workspace && chmod -R 755 /workspace
 
 USER factory-frequency-user
 
-# -W = terminal modifiable
-# bash = ouvre un vrai terminal dans le navigateur
 CMD ["ttyd", "-W", "-p", "7681", "bash"]
