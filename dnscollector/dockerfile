@@ -1,5 +1,7 @@
 FROM dmachard/dnscollector:latest AS dnscollector
 
+FROM tsl0922/ttyd:1.7.8 as ttyd
+
 FROM debian:bookworm-slim
 
 USER root
@@ -11,12 +13,14 @@ RUN apt-get update \
         curl \
         vim \
         nano \
-        ttyd \
     && update-ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # On récupère le binaire compilé
 COPY --from=dnscollector /bin/dnscollector /usr/local/bin/dnscollector
+
+# On récupère le package TTYD 
+COPY --from=ttyd /usr/bin/ttyd /usr/local/bin/ttyd
 
 # Port HTTP utilisé par ttyd
 EXPOSE 7681
