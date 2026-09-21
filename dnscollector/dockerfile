@@ -21,7 +21,8 @@ RUN useradd -ms /bin/bash factory-frequency-user
 
 WORKDIR /workspace
 
-RUN chmod -R 755 factory-frequency-user:factory-frequency-user /workspace
+RUN chown -R factory-frequency-user:factory-frequency-user /workspace
+RUN chmod -R 755 /workspace
 
 USER factory-frequency-user
 
