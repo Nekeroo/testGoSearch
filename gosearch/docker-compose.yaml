@@ -4,36 +4,19 @@ services:
       context: .
       dockerfile: ./dockerfile
     volumes:
-      - gosearch-data:/workspace
+     - gosearch-data:/workspace
     labels:
-      - traefik.docker.network=dokploy-network
-      - traefik.http.routers.factory-frequencies-gosearch-web.rule=Host(`factorycatalog.frequencies`) && PathPrefix(`/gosearch`)
-      - traefik.http.routers.factory-frequencies-gosearch-web.entrypoints=web
-      - traefik.http.services.factory-frequencies-gosearch-web.loadbalancer.server.port=7681
-      - traefik.http.routers.factory-frequencies-gosearch-web.service=factory-frequencies-gosearch-web
-      - traefik.http.middlewares.stripprefix-factory-frequencies-gosearch-.stripprefix.prefixes=/gosearch
-      - traefik.http.routers.factory-frequencies-gosearch-web.middlewares=redirect-to-https@file
-      - traefik.http.routers.factory-frequencies-gosearch-websecure.rule=Host(`factorycatalog.frequencies`) && PathPrefix(`/gosearch`)
-      - traefik.http.routers.factory-frequencies-gosearch-websecure.entrypoints=websecure
-      - traefik.http.services.factory-frequencies-gosearch-websecure.loadbalancer.server.port=7681
-      - traefik.http.routers.factory-frequencies-gosearch-websecure.service=factory-frequencies-gosearch-websecure
-      - traefik.http.routers.factory-frequencies-gosearch-websecure.middlewares=stripprefix-factory-frequencies-gosearch
-      - traefik.http.routers.factory-frequencies-gosearch-websecure.tls.certresolver=letsencrypt
-      - traefik.enable=true
+      - "traefik.enable=true"
     deploy:
       resources:
         limits:
           memory: 512M
-          cpus: "0.5"
+          cpus: '0.5'
         reservations:
           memory: 256M
+
     expose:
-      - "7681"
-    networks:
-      - dokploy-network
-      - default
+        - "7681"
+
 volumes:
   gosearch-data:
-networks:
-  dokploy-network:
-    external: true
