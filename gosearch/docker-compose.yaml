@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: ./dockerfile
+    labels:
+      - "traefik.enable=true"
     deploy:
       resources:
         limits:
