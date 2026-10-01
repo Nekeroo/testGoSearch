@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: ./dockerfile
+    volumes:
+     - gosearch-data:/workspace
     labels:
       - "traefik.enable=true"
     deploy:
