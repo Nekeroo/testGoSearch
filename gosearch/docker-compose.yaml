@@ -15,8 +15,8 @@ services:
         reservations:
           memory: 256M
 
-    expose:
-        - "7681"
+    ports:
+        - "7681:7681"
 
 volumes:
   gosearch-data:
